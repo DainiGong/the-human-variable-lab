@@ -18,6 +18,6 @@ Psychology papers are notoriously dense, packed with statistical noise and compl
 
 ## Take the Quizzes Live
 Instead of running code manually, you can experience all our interactive queries directly in your browser:
-👉 **[Click here to take the live quizzes in your browser!](https://dainigong.github.io/human-variable-lab/)***
+👉 **[Click here to take the live quizzes in your browser!](https://dainigong.github.io/human-variable-lab/)**
 ---
 *Created by Daini Gong. Read the full experiment breakdowns and participate in upcoming surveys at [The Human Variable Lab Substack](https://thehumanvariablelab.substack.com/).*
