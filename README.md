@@ -8,16 +8,17 @@ Psychology papers are notoriously dense, packed with statistical noise and compl
 * **Translating Classic Studies:** Each script breaks down a famous or obscure psychology experiment into clean, readable Python logic.
 * **Interactive Quizzes:** Take free quizzes to see where you would stand on historical psychology sides and test how your personal results compare against the original data.
 * **Testing Contemporary Minds:** Paired with anonymous community surveys from the Substack newsletter, this project explores whether historical psychological trends still hold true in our modern world.
-* **Built in Public:** Every experiment is added incrementally as a standalone, beginner-friendly Python file.
+* **Built in Public:** Every experiment is added incrementally as a standalone Python file.
 
 ## Query Directory
 
-| Query # | Title | Study Explored | File |
+| Query # | Title | Study Explored | Python File |
 | :--- | :--- | :--- | :--- |
-| **#001** | The Labcoat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) | `query_001_labcoat_dilemma.py` *(Coming soon)* |
+| **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) | [`query_001_labcoat_dilemma.py`](query_001_labcoat_dilemma.py) |
 
-## How to Run These Scripts
-Each `.py` file in this repository is self-contained and written using standard Python fundamentals. You can copy any script and run it directly in any browser-based Python environment (such as Kaggle, Programiz, or Replit) with no external installations required.
+## Take the Quizzes Live
+Instead of running code manually, you can experience all our interactive queries directly in your browser:
+👉 **[Click here to take the live quizzes on GitHub Pages!](https://dainigong.github.io/human-variable-lab/)** *(Live web version coming soon)*
 
 ---
 *Created by Daini Gong. Read the full experiment breakdowns and participate in upcoming surveys at [The Human Variable Lab Substack](https://thehumanvariablelab.substack.com/).*
