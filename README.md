@@ -14,7 +14,7 @@ Psychology papers are notoriously dense, packed with statistical noise and compl
 
 | Query # | Title | Study Explored | Python File |
 | :--- | :--- | :--- | :--- |
-| **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) | [`query_001_labcoat_dilemma.py`](query_001_labcoat_dilemma.py) |
+| **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) | [`query_001_labcoat_dilemma.py`](query_#001_the_labcoat_dilemma) |
 
 ## Take the Quizzes Live
 Instead of running code manually, you can experience all our interactive queries directly in your browser:
