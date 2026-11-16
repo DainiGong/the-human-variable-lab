@@ -4,7 +4,7 @@ Welcome to **The Human Variable Lab**, a public code repository and companion to
 
 Psychology papers are notoriously dense, packed with statistical noise and complex methodology that keeps fascinating human insights locked behind academic walls. This project strips the academic jargon away from famous behavioral experiments and translates classic psychological studies into simple, interactive Python scripts and free quizzes.
 
-## 🔬 About the Lab
+## About the Lab
 * **Translating Classic Studies:** Each script breaks down a famous or obscure psychology experiment into clean, readable Python logic.
 * **Interactive Quizzes:** Take free quizzes to see where you would stand on historical psychology sides and test how your personal results compare against the original data.
 * **Testing Contemporary Minds:** Paired with anonymous community surveys from the Substack newsletter, this project explores whether historical psychological trends still hold true in our modern world.
