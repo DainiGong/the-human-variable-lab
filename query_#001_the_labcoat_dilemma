@@ -1,0 +1,123 @@
+def run_labcoat_dilemma():
+    print("=" * 65)
+    print("QUERY #001: THE LAB COAT DILEMMA")
+    print("The Human Variable Lab | Based on Stanley Milgram (Yale, 1961)")
+    print("=" * 65)
+    print("A 30-second interactive experiment testing modern intuition")
+    print("against a dark psychological classic of authority and compliance.\n")
+
+    # --- QUESTION 1: Baseline Obedience ---
+    print("QUESTION 1:")
+    print("A scientist in a lab coat orders you to give a painful electric shock")
+    print("to a stranger in the next room as part of a study. The stranger is")
+    print("yelling to stop, but the scientist says: 'I take full responsibility.")
+    print("Please continue.' What do you do?")
+    print("  1. Refuse immediately and walk out.")
+    print("  2. Continue for a bit, but stop if the screaming gets worse.")
+    print("  3. Complete the study and follow instructions to the end.")
+    q1 = int(input("Enter 1, 2, or 3: "))
+    print()
+
+    # --- QUESTION 2: Proximity of Authority (Phone Variable) ---
+    print("QUESTION 2:")
+    print("How much less likely would you be to obey if the scientist wasn't")
+    print("in the room, but was giving you orders over a phone call?")
+    print("  Scale: 1 (Much less likely to obey) to 5 (No difference at all)")
+    q2 = int(input("Enter a number from 1 to 5: "))
+    print()
+
+    # --- QUESTION 3: Peer Defiance ---
+    print("QUESTION 3:")
+    print("If two of your friends are in the room with you and they both")
+    print("suddenly refuse to give the shocks and walk out, what do you do?")
+    print("  1. Walk out with them immediately.")
+    print("  2. Ignore them and keep following the scientist's orders.")
+    print("  3. Hesitate, but make my own decision.")
+    q3 = int(input("Enter 1, 2, or 3: "))
+    print()
+
+    # --- QUESTION 4: The Agentic Shift ---
+    print("QUESTION 4:")
+    print("Do you believe ordinary, good people can be talked into doing")
+    print("terrible things just because an authority figure told them to?")
+    print("  Scale: 1 (Absolutely not) to 5 (Absolutely yes)")
+    q4 = int(input("Enter a number from 1 to 5: "))
+    print()
+
+    # --- SCORING LOGIC (Using basic arithmetic & boolean multiplication) ---
+    # Maximum possible compliance points = 100
+    q1_points = (q1 == 1) * 0 + (q1 == 2) * 20 + (q1 == 3) * 40
+    q2_points = (q2 - 1) * 7.5
+    q3_points = (q3 == 1) * 0 + (q3 == 3) * 15 + (q3 == 2) * 30
+    compliance_score = q1_points + q2_points + q3_points
+
+    print("=" * 65)
+    print("YOUR RESULTS VS. MILGRAM'S 1961 YALE DATA")
+    print("=" * 65)
+    print("Your Authority Compliance Score: " + str(compliance_score) + " / 100\n")
+
+    # 1. Baseline comparison (top-to-bottom waterfall)
+    print("[1] BASELINE OBEDIENCE:")
+    if q1 == 3:
+        print("-> You predicted full compliance (450V). In Milgram's baseline study,")
+        print("   an astonishing 65% of ordinary participants went all the way to")
+        print("   the lethal XXX switch, even while visibly agonizing over it.")
+    elif q1 == 2:
+        print("-> You predicted conditional obedience. Most people assume they would")
+        print("   stop once the screaming gets bad, yet 65% of Milgram's subjects")
+        print("   kept flipping switches past 300V even after the room went silent.")
+    else:
+        print("-> You predicted immediate refusal. Before the study, psychiatrists")
+        print("   predicted 99% of people would do what you chose. In reality, only")
+        print("   35% of participants refused before reaching the maximum 450V.")
+    print()
+
+    # 2. Proximity comparison
+    print("[2] THE PROXIMITY EFFECT (PHONE VARIABLE):")
+    if q2 <= 2:
+        print("-> Your intuition matches the data. When Milgram's scientist left the")
+        print("   room and gave orders by phone, full obedience plummeted from 65%")
+        print("   down to 22.5%. Several subjects even faked giving the shocks.")
+    elif q2 == 3:
+        print("-> You see a moderate difference. Historically, physical distance broke")
+        print("   the spell of authority sharply: compliance dropped from 65% to 22.5%.")
+    else:
+        print("-> You felt distance wouldn't change much, yet Milgram found proximity")
+        print("   is critical: removing the lab coat from the room cut obedience")
+        print("   nearly in thirds (from 65% down to 22.5%).")
+    print()
+
+    # 3. Peer defiance comparison
+    print("[3] THE POWER OF PEER DEFIANCE:")
+    if q3 == 1:
+        print("-> You aligned with the rebel majority. When two fellow 'teachers'")
+        print("   refused and walked out in Milgram's variation, peer defiance proved")
+        print("   contagious: only 10% of participants went to the maximum voltage.")
+    elif q3 == 3:
+        print("-> You prioritized independent judgment. Historically, seeing peers")
+        print("   rebel shattered institutional pressure so strongly that 90% of")
+        print("   participants ultimately refused to go to 450V.")
+    else:
+        print("-> You held firm to authority despite peer rebellion—putting you in")
+        print("   the rare 10% who still obeyed after two peers walked out.")
+    print()
+
+    # 4. Agentic Shift comparison
+    print("[4] THE AGENTIC STATE:")
+    if q4 >= 4:
+        print("-> You recognize what Milgram called the 'Agentic Shift': when people")
+        print("   enter a hierarchy and an authority says 'I take full responsibility,'")
+        print("   ordinary individuals shift from moral agents into instruments.")
+    elif q4 == 3:
+        print("-> You sit on the fence between personal disposition and situational")
+        print("   power. Milgram's work demonstrated that situational pressure can")
+        print("   override personal morals far faster than we like to admit.")
+    else:
+        print("-> You lean toward a dispositional view (bad actions come from bad")
+        print("   people). Milgram's findings challenged this comforting belief,")
+        print("   showing ordinary citizens can be steered into harmful compliance.")
+
+    print("\nRead the full breakdown at: https://thehumanvariablelab.substack.com/")
+
+# Run the quiz
+run_labcoat_dilemma()
