@@ -10,11 +10,11 @@ Psychology papers are notoriously dense, packed with statistical noise and compl
 * **Testing Contemporary Minds:** Paired with anonymous community surveys from the Substack newsletter, this project explores whether historical psychological trends still hold true in our modern world.
 * **Built in Public:** Every experiment is added incrementally as a standalone Python file.
 
-## Query Directory
+## 📂 Query Directory
 
-| Query # | Title | Study Explored | Python File |
-| :--- | :--- | :--- | :--- |
-| **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) | [`query_001_labcoat_dilemma.py`](query_#001_the_labcoat_dilemma) |
+| Query # | Title | Study Explored |
+| :--- | :--- | :--- |
+| **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) |
 
 ## Take the Quizzes Live
 Instead of running code manually, you can experience all our interactive queries directly in your browser:
