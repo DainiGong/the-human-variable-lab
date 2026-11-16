@@ -7,52 +7,172 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 700px;
-            margin: 60px auto;
+            max-width: 720px;
+            margin: 50px auto;
             padding: 0 20px;
             color: #222;
             line-height: 1.6;
             background-color: #fcfcfc;
         }
         h1 { font-size: 2.2rem; margin-bottom: 5px; color: #111; }
-        .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 30px; }
+        .subtitle { color: #555; font-size: 1.05rem; margin-bottom: 30px; }
         .card {
             background: #fff;
             border: 1px solid #e1e4e8;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border-radius: 10px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
-        .card h3 { margin-top: 0; color: #0366d6; }
-        a.button {
-            display: inline-block;
-            background: #24292e;
-            color: #fff;
-            padding: 10px 18px;
+        .card h2 { margin-top: 0; color: #111; font-size: 1.4rem; }
+        .question { margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid #f0f0f0; }
+        .question p { font-weight: 600; margin-bottom: 10px; }
+        label { display: block; margin-bottom: 8px; cursor: pointer; font-weight: 400; }
+        select, button {
+            font-size: 1rem;
+            padding: 10px 14px;
             border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #111;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
             margin-top: 10px;
         }
-        a.button:hover { background: #0366d6; }
+        button:hover { background: #0366d6; }
+        #results {
+            display: none;
+            margin-top: 24px;
+            padding: 20px;
+            background: #f6f8fa;
+            border-left: 4px solid #0366d6;
+            border-radius: 6px;
+        }
+        .code-link {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: #0366d6;
+            text-decoration: none;
+        }
         footer { margin-top: 40px; font-size: 0.9rem; color: #666; border-top: 1px solid #eaeaea; padding-top: 20px; }
     </style>
 </head>
 <body>
 
     <h1>The Human Variable Lab 🧠</h1>
-    <div class="subtitle">Companion code and interactive browser modules for <a href="https://thehumanvariablelab.substack.com/" target="_blank">The Human Variable Lab Substack</a>.</div>
+    <div class="subtitle">Interactive behavioral psychology experiments paired with <a href="https://thehumanvariablelab.substack.com/" target="_blank">The Human Variable Lab Substack</a>.</div>
 
     <div class="card">
-        <h3>Query #001: The Lab Coat Dilemma</h3>
-        <p>A 30-second experiment testing modern intuition against Stanley Milgram's 1961 Yale obedience study. See where you stand on authority, peer pressure, and compliance.</p>
-        <a href="https://github.com/dainigong/human-variable-lab/blob/main/query_001_labcoat_dilemma.py" class="button" target="_blank">View Python Source Code</a>
+        <h2>Query #001: The Lab Coat Dilemma</h2>
+        <p style="color:#555; font-size:0.95rem;">Based on Stanley Milgram's Obedience Study (Yale University, 1961). Answer the 4 questions below to see how your intuition compares to historical data.</p>
+
+        <div class="question">
+            <p>1. A scientist in a lab coat orders you to give a painful electric shock to a stranger in the next room. The stranger yells to stop, but the scientist says: "I take full responsibility. Please continue." What do you do?</p>
+            <label><input type="radio" name="q1" value="1"> Refuse immediately and walk out.</label>
+            <label><input type="radio" name="q1" value="2"> Continue for a bit, but stop if the screaming gets worse.</label>
+            <label><input type="radio" name="q1" value="3"> Complete the study and follow instructions to the end.</label>
+        </div>
+
+        <div class="question">
+            <p>2. How much less likely would you be to obey if the scientist wasn't in the room, but was giving you orders over a phone call?</p>
+            <select id="q2">
+                <option value="1">1 - Much less likely to obey</option>
+                <option value="2">2 - Somewhat less likely</option>
+                <option value="3">3 - Moderately less likely</option>
+                <option value="4">4 - Slightly less likely</option>
+                <option value="5">5 - No difference at all</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>3. If two of your friends are in the room with you and they both suddenly refuse to give the shocks and walk out, what do you do?</p>
+            <label><input type="radio" name="q3" value="1"> Walk out with them immediately.</label>
+            <label><input type="radio" name="q3" value="2"> Ignore them and keep following the scientist's orders.</label>
+            <label><input type="radio" name="q3" value="3"> Hesitate, but make my own decision.</label>
+        </div>
+
+        <div class="question" style="border-bottom:none;">
+            <p>4. Do you believe ordinary, good people can be talked into doing terrible things just because an authority figure told them to?</p>
+            <select id="q4">
+                <option value="1">1 - Absolutely not</option>
+                <option value="2">2 - Unlikely</option>
+                <option value="3">3 - Unsure / Depends</option>
+                <option value="4">4 - Likely</option>
+                <option value="5">5 - Absolutely yes</option>
+            </select>
+        </div>
+
+        <button onclick="calculateResults()">Compare My Choices to Milgram's Data</button>
+
+        <div id="results"></div>
+
+        <div>
+            <a href="https://github.com/dainigong/human-variable-lab/blob/main/query_001_labcoat_dilemma.py" class="code-link" target="_blank">View the underlying Python logic (query_001_labcoat_dilemma.py) &rarr;</a>
+        </div>
     </div>
 
     <footer>
-        <p>Created by Daini Gong. Built in public with Python.</p>
+        <p>Created by Daini Gong. Built in public.</p>
     </footer>
+
+    <script>
+        function calculateResults() {
+            const q1El = document.querySelector('input[name="q1"]:checked');
+            const q3El = document.querySelector('input[name="q3"]:checked');
+
+            if (!q1El || !q3El) {
+                alert("Please select an answer for Questions 1 and 3 first!");
+                return;
+            }
+
+            const q1 = parseInt(q1El.value);
+            const q2 = parseInt(document.getElementById("q2").value);
+            const q3 = parseInt(q3El.value);
+            const q4 = parseInt(document.getElementById("q4").value);
+
+            // Exact same scoring logic as query_001_labcoat_dilemma.py
+            const q1Points = (q1 === 3 ? 40 : (q1 === 2 ? 20 : 0));
+            const q2Points = (q2 - 1) * 7.5;
+            const q3Points = (q3 === 2 ? 30 : (q3 === 3 ? 15 : 0));
+            const score = q1Points + q2Points + q3Points;
+
+            let html = "<h3>Your Authority Compliance Score: " + score + " / 100</h3>";
+
+            if (q1 === 3) {
+                html += "<p><strong>1. Baseline Obedience:</strong> You predicted full compliance (450V). In Milgram's baseline study, an astonishing <strong>65%</strong> of ordinary participants went all the way to the lethal XXX switch.</p>";
+            } else if (q1 === 2) {
+                html += "<p><strong>1. Baseline Obedience:</strong> You predicted conditional obedience. Most people assume they would stop once the screaming gets bad, yet <strong>65%</strong> of Milgram's subjects kept flipping switches past 300V even after the room went silent.</p>";
+            } else {
+                html += "<p><strong>1. Baseline Obedience:</strong> You predicted immediate refusal. Psychiatrists predicted 99% of people would refuse, yet only <strong>35%</strong> of participants actually stopped before reaching 450V.</p>";
+            }
+
+            if (q2 <= 2) {
+                html += "<p><strong>2. Proximity Effect:</strong> Your intuition matches the data. When Milgram's scientist gave orders by phone instead of in person, full obedience plummeted from 65% down to <strong>22.5%</strong>.</p>";
+            } else {
+                html += "<p><strong>2. Proximity Effect:</strong> Physical distance actually breaks the spell of authority sharply: when orders were given by phone, compliance dropped from 65% down to <strong>22.5%</strong>.</p>";
+            }
+
+            if (q3 === 1 || q3 === 3) {
+                html += "<p><strong>3. Peer Defiance:</strong> Peer rebellion is contagious. When two fellow teachers refused and walked out, only <strong>10%</strong> of participants went to the maximum voltage.</p>";
+            } else {
+                html += "<p><strong>3. Peer Defiance:</strong> Holding firm despite peer rebellion puts you in the rare <strong>10%</strong> who still obeyed after two peers walked out.</p>";
+            }
+
+            if (q4 >= 4) {
+                html += "<p><strong>4. The Agentic State:</strong> You recognize what Milgram called the 'Agentic Shift'—when an authority figure assumes responsibility, ordinary individuals shift from moral agents into instruments.</p>";
+            } else {
+                html += "<p><strong>4. The Agentic State:</strong> Milgram's work challenged the belief that bad actions only come from bad people, showing how situational hierarchy overrides personal morals.</p>";
+            }
+
+            const resultsBox = document.getElementById("results");
+            resultsBox.innerHTML = html;
+            resultsBox.style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
