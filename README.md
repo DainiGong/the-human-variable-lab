@@ -15,6 +15,7 @@ Psychology papers are notoriously dense, packed with statistical noise and compl
 | Query # | Title | Study Explored |
 | :--- | :--- | :--- |
 | **#001** | The Lab Coat Dilemma | Stanley Milgram's Obedience Study (Yale, 1961) |
+| **#002** | The Optical Illusion of Consensus | Solomon Asch's Conformity Experiments (1951) |
 
 ## Take the Quizzes Live
 Instead of running code manually, you can experience all our interactive queries directly in your browser:
