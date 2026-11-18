@@ -21,7 +21,7 @@
             border: 1px solid #e1e4e8;
             border-radius: 10px;
             padding: 28px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
         .card h2 { margin-top: 0; color: #111; font-size: 1.4rem; }
@@ -43,20 +43,13 @@
             margin-top: 10px;
         }
         button:hover { background: #0366d6; }
-        #results {
+        .results-box {
             display: none;
             margin-top: 24px;
             padding: 20px;
             background: #f6f8fa;
             border-left: 4px solid #0366d6;
             border-radius: 6px;
-        }
-        .code-link {
-            display: inline-block;
-            margin-top: 14px;
-            font-size: 0.9rem;
-            color: #0366d6;
-            text-decoration: none;
         }
         footer { margin-top: 40px; font-size: 0.9rem; color: #666; border-top: 1px solid #eaeaea; padding-top: 20px; }
     </style>
@@ -66,6 +59,53 @@
     <h1>The Human Variable Lab 🧠</h1>
     <div class="subtitle">Interactive behavioral psychology experiments paired with <a href="https://thehumanvariablelab.substack.com/" target="_blank">The Human Variable Lab Substack</a>.</div>
 
+    <!-- QUERY #002 CARD -->
+    <div class="card">
+        <h2>Query #002: The Optical Illusion of Consensus</h2>
+        <p style="color:#555; font-size:0.95rem;">Based on Solomon Asch's Conformity Experiments (1951). Test how your intuition holds up against group pressure and the fear of standing out.</p>
+
+        <div class="question">
+            <p>1. You clearly see that Line A matches the target line, yet everyone else at the table confidently calls out "Line B" before your turn. What do you say out loud?</p>
+            <label><input type="radio" name="q2_1" value="1"> Say "Line A" and stand by what my own eyes see.</label>
+            <label><input type="radio" name="q2_1" value="2"> Say "Line B" to avoid awkwardness, even though I know it is wrong.</label>
+            <label><input type="radio" name="q2_1" value="3"> Say "Line B" because I assume the group must see something I missed.</label>
+        </div>
+
+        <div class="question">
+            <p>2. If you could write your answer privately on paper instead of speaking out loud, how much more likely would you be to stick with Line A?</p>
+            <select id="q2_2">
+                <option value="1">1 - No difference, I would answer the same</option>
+                <option value="2">2 - Slightly more likely</option>
+                <option value="3">3 - Moderately more likely</option>
+                <option value="4">4 - Significantly more likely</option>
+                <option value="5">5 - Much more likely to stick with Line A</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>3. Imagine just ONE other person at the table breaks unanimity and says "Line A" before your turn. How does that affect you?</p>
+            <label><input type="radio" name="q2_3" value="1"> It makes it dramatically easier for me to speak up and say "Line A".</label>
+            <label><input type="radio" name="q2_3" value="2"> It has zero impact on me; I decide independently either way.</label>
+            <label><input type="radio" name="q2_3" value="3"> I would still feel pressured to agree with the larger majority.</label>
+        </div>
+
+        <div class="question" style="border-bottom:none;">
+            <p>4. How confident are you that you would NEVER cave to group pressure when an objective fact is right in front of your eyes?</p>
+            <select id="q2_4">
+                <option value="1">1 - Not confident, group pressure is strong</option>
+                <option value="2">2 - Somewhat skeptical of my own resistance</option>
+                <option value="3">3 - Unsure / Depends on the room</option>
+                <option value="4">4 - Fairly confident I would resist</option>
+                <option value="5">5 - 100% immune to crowd pressure</option>
+            </select>
+        </div>
+
+        <button onclick="calculateQuery002()">Compare My Choices to Asch's Data</button>
+
+        <div id="results_002" class="results-box"></div>
+    </div>
+
+    <!-- QUERY #001 CARD -->
     <div class="card">
         <h2>Query #001: The Lab Coat Dilemma</h2>
         <p style="color:#555; font-size:0.95rem;">Based on Stanley Milgram's Obedience Study (Yale University, 1961). Answer the 4 questions below to see how your intuition compares to historical data.</p>
@@ -108,11 +148,7 @@
 
         <button onclick="calculateResults()">Compare My Choices to Milgram's Data</button>
 
-        <div id="results"></div>
-
-        <div>
-            <a href="https://github.com/dainigong/human-variable-lab/blob/main/query_001_labcoat_dilemma.py" class="code-link" target="_blank">View the underlying Python logic (query_001_labcoat_dilemma.py) &rarr;</a>
-        </div>
+        <div id="results" class="results-box"></div>
     </div>
 
     <footer>
@@ -120,6 +156,58 @@
     </footer>
 
     <script>
+        function calculateQuery002() {
+            const q1El = document.querySelector('input[name="q2_1"]:checked');
+            const q3El = document.querySelector('input[name="q2_3"]:checked');
+
+            if (!q1El || !q3El) {
+                alert("Please select an answer for Questions 1 and 3 first!");
+                return;
+            }
+
+            const q1 = parseInt(q1El.value);
+            const q2 = parseInt(document.getElementById("q2_2").value);
+            const q3 = parseInt(q3El.value);
+            const q4 = parseInt(document.getElementById("q2_4").value);
+
+            const q1Points = (q1 === 3 ? 50 : (q1 === 2 ? 35 : 0));
+            const q2Points = (q2 - 1) * 5;
+            const q3Points = (q3 === 3 ? 30 : (q3 === 1 ? 10 : 0));
+            const score = q1Points + q2Points + q3Points;
+
+            let html = "<h3>Your Social Consensus Susceptibility Score: " + score + " / 100</h3>";
+
+            if (q1 === 1) {
+                html += "<p><strong>1. The Rigged Room:</strong> You stood firm on Line A. In Solomon Asch's 1951 trials, only <strong>25%</strong> of participants defied the crowd across every single round. A massive <strong>75%</strong> conformed at least once.</p>";
+            } else if (q1 === 2) {
+                html += "<p><strong>1. The Rigged Room:</strong> You experienced <em>Distortion of Action</em>: knowing Line A was right, yet speaking a lie to avoid standing out. Participants yielded to the majority <strong>36.8%</strong> of the time across all trials.</p>";
+            } else {
+                html += "<p><strong>1. The Rigged Room:</strong> You experienced <em>Distortion of Judgment</em>: the unified front made you doubt your own eyes and assume the crowd knew better.</p>";
+            }
+
+            if (q2 >= 4) {
+                html += "<p><strong>2. Private vs. Public Compliance:</strong> Your intuition matches the data. When participants wrote answers down privately instead of speaking aloud, conformity plummeted by nearly <strong>two-thirds</strong>.</p>";
+            } else {
+                html += "<p><strong>2. Private vs. Public Compliance:</strong> Removing the public spotlight changes everything: when Asch let subjects write answers privately, conformity dropped by nearly <strong>two-thirds</strong>.</p>";
+            }
+
+            if (q3 === 1 || q3 === 2) {
+                html += "<p><strong>3. The Power of a Single Dissenter:</strong> When Asch planted just ONE allied actor to break unanimity, conformity plunged by <strong>80%</strong> (dropping from 32% down to just 5%).</p>";
+            } else {
+                html += "<p><strong>3. The Power of a Single Dissenter:</strong> Unanimity is surprisingly fragile: even when a single dissenter gave a different incorrect answer, conformity still dropped from 32% down to <strong>9%</strong>.</p>";
+            }
+
+            if (q4 >= 4) {
+                html += "<p><strong>4. The Illusion of Immunity:</strong> Modern culture romanticizes the lone rebel, yet <strong>75%</strong> of ordinary participants in Asch's lab yielded at least once under live social scrutiny.</p>";
+            } else {
+                html += "<p><strong>4. The Illusion of Immunity:</strong> You recognize the quiet gravity of belonging. As Asch's data shows, it only takes one person speaking up to give everyone else permission to trust their own eyes.</p>";
+            }
+
+            const resultsBox = document.getElementById("results_002");
+            resultsBox.innerHTML = html;
+            resultsBox.style.display = "block";
+        }
+
         function calculateResults() {
             const q1El = document.querySelector('input[name="q1"]:checked');
             const q3El = document.querySelector('input[name="q3"]:checked');
@@ -134,7 +222,6 @@
             const q3 = parseInt(q3El.value);
             const q4 = parseInt(document.getElementById("q4").value);
 
-            // Exact same scoring logic as query_001_labcoat_dilemma.py
             const q1Points = (q1 === 3 ? 40 : (q1 === 2 ? 20 : 0));
             const q2Points = (q2 - 1) * 7.5;
             const q3Points = (q3 === 2 ? 30 : (q3 === 3 ? 15 : 0));
@@ -163,7 +250,7 @@
             }
 
             if (q4 >= 4) {
-                html += "<p><strong>4. The Agentic State:</strong> You recognize what Milgram called the 'Agentic Shift'—when an authority figure assumes responsibility, ordinary individuals shift from moral agents into instruments.</p>";
+                html += "<p><strong>4. The Agentic State:</strong> You recognize what Milgram called the 'Agentic Shift': when an authority figure assumes responsibility, ordinary individuals shift from moral agents into instruments.</p>";
             } else {
                 html += "<p><strong>4. The Agentic State:</strong> Milgram's work challenged the belief that bad actions only come from bad people, showing how situational hierarchy overrides personal morals.</p>";
             }
